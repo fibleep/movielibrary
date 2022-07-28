@@ -33,7 +33,7 @@ public class MovieController {
 
     /**
      * Add movies
-     * @param movies
+     * @param movies list of movies
      */
     @PostMapping("")
     public int add(@RequestBody List<Movie> movies) {
@@ -41,8 +41,9 @@ public class MovieController {
     }
 
     /**
-     * Update movie
-     * @param movie
+     * Update movie - PUT method
+     * @param id id of movie
+     * @param updatedMovie data to be updated
      */
     @PutMapping("/{id}")
     public int update(@PathVariable("id") int id, @RequestBody Movie updatedMovie) {
@@ -57,6 +58,12 @@ public class MovieController {
             return -1;
         }
     }
+
+    /**
+     * Partially update movie - PATCH method
+     * @param id id of movie
+     * @param updatedMovie data to be updated
+     */
     @PatchMapping("/{id}")
     public int partiallyUpdate(@PathVariable("id") int id, @RequestBody Movie updatedMovie) {
         Movie movie = movieRepository.getById(id);
@@ -74,6 +81,10 @@ public class MovieController {
             return -1;
         }
     }
+    /**
+     * Delete movie
+     * @param id
+     */
     @DeleteMapping("/{id}")
     public int delete(@PathVariable("id") int id) {
         return movieRepository.delete(id);

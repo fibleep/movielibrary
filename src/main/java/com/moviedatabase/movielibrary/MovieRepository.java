@@ -23,7 +23,6 @@ public class MovieRepository {
     /**
      * Get movie by id
      * @param id Movie id
-     * @return Movie
      */
     public Movie getById(int id){
         return jdbcTemplate.queryForObject("select id, name, rating from movie where id=?",BeanPropertyRowMapper.newInstance(Movie.class),id);
@@ -32,7 +31,6 @@ public class MovieRepository {
     /**
      * Add movies
      * @param movies
-     * @return
      */
     public int save(List<Movie> movies) {
         movies.forEach(movie -> {
@@ -44,11 +42,15 @@ public class MovieRepository {
     /**
      * Update movie
      * @param movie
-     * @return
      */
     public int update(Movie movie){
         return jdbcTemplate.update("update movie set name=?, rating=? where id=?", movie.getName(), movie.getRating(), movie.getId());
     }
+
+    /**
+     * Delete movie
+     * @param id
+     */
     public int delete(int id){
         return jdbcTemplate.update("delete from movie where id=?", id);
     }
